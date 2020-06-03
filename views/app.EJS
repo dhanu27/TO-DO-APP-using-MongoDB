@@ -1,0 +1,59 @@
+<html>
+
+<head>
+    <title>
+        <%=title%>
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body>
+    <div id="app-container">
+        <form action="/addtask" method="POST">
+            <h1>TO DO APP</h1>
+            <div class="task-input">
+                <label>DESCRIPTION</label>
+                <textarea rows="3" required placeholder="What do you need to do?" name="description"></textarea>
+            </div>
+            <div class="container">
+                <div class="category">
+                    <label>Category</label>
+                    <select name="category" required>
+                        <option>Choose a categroy</option>
+                        <%for(i of category) {%>
+                        <option><%=i%></option>
+                        <%}%>  
+                    </select>
+                </div> 
+               <div class="category">
+                   <label>Due Date</label>
+                 <input type="date" name="duedate" required>
+               </div>    
+             </div>  
+                <button type="submit" id="add-bttn" ><i class="fa fa-plus"></i> ADD TASK </button>
+            </form>
+            <form action="/delete-task" method="POST">    
+             <button type="submit"><i class="fa fa-trash"></i> DELETE TASKS </button>      
+              <%for(i of tasks) {%>
+                        <div class="tasks">
+                            <div class="checkdiv">
+                                <input type="checkbox" class="isSelected" name="deleteId" value="<%= i._id%>">
+                            </div>
+                            <div class="description">
+                                <h3><%=i.description%></h3>
+                                <i class="fa fa-calendar"></i> <%=i.dueDate%>
+                            </div>
+
+                            <div class="categroy-bttn">
+                                <div>
+                                    <%=i.category%>
+                                </div>
+                            </div>
+                        </div>
+                        <%}%>   
+                    </form> 
+        </div>
+        <script src="./script.js" defer></script>
+    </body>  
+</html>
